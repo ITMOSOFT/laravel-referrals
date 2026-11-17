@@ -35,6 +35,5 @@ abstract class TestCase extends Orchestra
             'prefix' => '',
             'foreign_key_constraints' => true,
         ]]);
-        $this->defineDatabaseMigrations();
     }
 }

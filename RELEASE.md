@@ -1,47 +1,45 @@
 # Release checklist
 
-1. Review the source and run the full test suite.
+1. Run `composer test` and confirm all tests pass.
 2. Confirm the GitHub Actions matrix passes for supported PHP and Laravel versions.
 3. Commit and push the package source to `main`.
-4. Create and push the annotated `v1.0.0` tag.
+4. Create and push the annotated `v1.0.1` tag.
 5. Create the GitHub Release using the title and notes below.
-6. Submit `itmosoft/laravel-referrals` to Packagist or confirm the Packagist GitHub hook is active.
+6. Confirm Packagist detects the new tag.
 
 ## Git commands (run locally)
 
 ```bash
 git add .
 git status
-git commit -m "feat: add Laravel referrals package"
+git commit -m "fix: avoid duplicate Testbench migration setup"
 git push origin main
 
-git tag -a v1.0.0 -m "Release v1.0.0"
-git push origin v1.0.0
+git tag -a v1.0.1 -m "Release v1.0.1"
+git push origin v1.0.1
 ```
 
 ## GitHub Release
 
-Title: `v1.0.0 - Initial Release`
+Title: `v1.0.1 - Fix Duplicate Testbench Migration Setup`
 
 ```markdown
-## Features
-- Polymorphic referral codes for users or other Eloquent models.
-- Referral attribution with self-referral and duplicate-referee protection.
-- Referral lifecycle: pending, qualified, rewarded, and rejected.
-- Unique referral code generation and active-code validation.
-- Pluggable reward issuer contract for integration with loyalty and gift-card systems.
-- Configurable table prefix and model classes.
+## Bug Fixes
+- Removed the duplicate manual call to `defineDatabaseMigrations()` from the package test case setup.
+- Orchestra Testbench already invokes this migration hook; calling it again attempted to recreate the `users` table and caused all 10 feature tests to fail before exercising package behavior.
 
 ## Compatibility
 - PHP 8.3+
 - Laravel 12 and 13
 
-## Installation
-composer require itmosoft/laravel-referrals
+## Upgrade
+Update the package to `^1.0.1`:
+
+composer update itmosoft/laravel-referrals
 ```
+
+No application database migration changes are required for this test-only fix.
 
 ## Packagist
 
-Package name: `itmosoft/laravel-referrals`
-
-After the GitHub tag is published, verify Packagist detects `v1.0.0`. If this is the first release, submit the GitHub repository URL at https://packagist.org/packages/submit.
+Verify Packagist detects `v1.0.1` after the GitHub tag is pushed.
