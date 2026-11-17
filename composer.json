@@ -1,0 +1,45 @@
+{
+    "name": "itmosoft/laravel-referrals",
+    "description": "Referral codes, attribution, qualification, and reward integration for Laravel applications.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "illuminate/contracts": "^12.0 || ^13.0",
+        "illuminate/database": "^12.0 || ^13.0",
+        "illuminate/support": "^12.0 || ^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0 || ^11.0",
+        "phpunit/phpunit": "^11.5 || ^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ItmoSoft\\Referrals\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ItmoSoft\\Referrals\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-text"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ItmoSoft\\Referrals\\ReferralServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
